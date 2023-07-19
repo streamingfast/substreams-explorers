@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package eth.block_meta.v1;
+
+message BlockMeta {
+  uint64 number = 1;
+  string hash = 2;
+  string parent_hash = 3;
+}

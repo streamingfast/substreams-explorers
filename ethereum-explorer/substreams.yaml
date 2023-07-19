@@ -1,0 +1,43 @@
+specVersion: v0.1.0
+package:
+  name: "substreams_template"
+  version: v0.1.0
+
+protobuf:
+  files:
+    - transaction.proto
+    - event.proto
+    - block_meta.proto
+  importPaths:
+    - ./proto
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: ./target/wasm32-unknown-unknown/release/substreams.wasm
+
+modules:
+  - name: map_block_meta
+    kind: map
+    inputs:
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:eth.block_meta.v1.BlockMeta
+  - name: map_filter_transaction
+    kind: map
+    inputs:
+      - params: string
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:eth.transaction.v1.TransactionOption
+  - name: map_contract_events
+    kind: map
+    inputs:
+      - params: string
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:eth.event.v1.Events
+
+params:
+  map_filter_transaction: "4faa877df84080a9d98b1e28294c4680bb141ec27a1a5dee009c3e02dfa65ab7"
+  map_contract_events: "bc4ca0eda7647a8ab7c2061c2e118a18a936f13d"  

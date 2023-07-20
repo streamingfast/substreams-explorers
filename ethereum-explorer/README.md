@@ -4,7 +4,7 @@ The Ethereum Explorer consists of several Substreams modules showcasing the most
 
 ## Before You Begin
 
-Make sure you have the [Substreams CLI installed](https://substreams.streamingfast.io/getting-started/installing-the-cli), and you know the [basic structure of a Substreams module](https://substreams.streamingfast.io/getting-started/quickstart).
+Make sure you have the [Substreams CLI installed](https://substreams.streamingfast.io/getting-started/installing-the-cli), and you know the [basic structure of a Substreams module](https://substreams.streamingfast.io/getting-started/quickstart). You must also provide an [authentication token](https://substreams.streamingfast.io/reference-and-specs/authentication).
 
 ## Modules
 

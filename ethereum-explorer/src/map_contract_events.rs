@@ -13,12 +13,8 @@ pub fn map_contract_events(contract_address: String, blk: &Block) -> Events {
         let to = Hex(&tr.to).to_string();
 
         if to == contract_address {
-            //substreams::log::info!(hash);
-
             let transaction_events = &mut get_transaction_events(&tr);
             events.append(transaction_events);
-
-            substreams::log::info!("//////////////////");
         }
     }
 

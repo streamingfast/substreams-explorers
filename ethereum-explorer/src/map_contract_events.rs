@@ -1,34 +1,52 @@
-mod pb;
 use crate::pb::eth::event::v1::Events;
 use crate::pb::eth::event::v1::Event;
 use substreams_ethereum::pb::eth::v2::Block;
 use substreams::Hex;
 use substreams_ethereum::pb::eth::v2::Log;
 use substreams_ethereum::pb::eth::v2::TransactionTrace;
+use substreams::errors::Error;
+use crate::util;
 
-pub fn map_contract_events(contract_address: String, blk: &Block) -> Events {
+#[substreams::handlers::map]
+fn map_contract_events(contract_address: String, blk: Block) -> Result<Events, Error> {
+   let error = verify_parameter(&contract_address);
+   if error.is_some() {
+    return Err(error.unwrap());
+   }
+
     let mut events: Vec<Event> = Vec::new();
+    let contract_address_as_vec = match Hex::decode(&contract_address) {
+        Ok(address) => address,
+        Err(error) => return Err(Error::Unexpected(error.to_string())),
+    };
 
-    for tr in &blk.transaction_traces {
-        let to = Hex(&tr.to).to_string();
-
-        if to == contract_address {
-            let transaction_events = &mut get_transaction_events(&tr);
-            events.append(transaction_events);
+    for transaction in &blk.transaction_traces {
+        if transaction.to == contract_address_as_vec {
+            let transaction_events = get_transaction_events(&transaction);
+            events.extend(transaction_events);
         }
     }
 
-    return Events { events }
+    Ok(Events { events })
+}
+
+fn verify_parameter(contract_address: &String) -> Option<Error> {
+    if !util::is_address_valid(contract_address) {
+        return Some(Error::Unexpected(String::from("Contract address is not valid")))
+    }
+
+    return None
 }
 
 fn get_transaction_events(transaction: &TransactionTrace) -> Vec<Event> {
     let mut transaction_events: Vec<Event> = Vec::new();
 
     for log in &transaction.receipt().receipt.logs {
-        let address = Hex(&log.address).to_string();
+        let address = util::hexadecimal_to_string(&log.address);
         let topics = get_log_topics(&log);
 
-        transaction_events.push(create_event_from(address, topics, &transaction.hash))
+        let event = create_event_from(address, topics, util::hexadecimal_to_string(&transaction.hash));
+        transaction_events.push(event)
     }
 
     return transaction_events;
@@ -38,19 +56,18 @@ fn get_log_topics(log: &Log) -> Vec<String> {
     let mut topics: Vec<String> = Vec::new();
 
     for topic in &log.topics {
-        let topic_string = Hex(topic).to_string();
+        let topic_string = util::hexadecimal_to_string(topic);
         topics.push(topic_string)
     }
 
     return topics;
 }
 
-fn create_event_from(address: String, topics: Vec<String>, hash: &Vec<u8>) -> Event {
-    let hash_as_string = Hex(hash).to_string();
+fn create_event_from(address: String, topics: Vec<String>, hash: String) -> Event {
 
     return Event { 
         address, 
         topics, 
-        tx_hash: hash_as_string 
+        tx_hash: hash 
     }
 }

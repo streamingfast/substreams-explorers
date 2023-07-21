@@ -1,9 +1,9 @@
 // @generated
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct TransactionOption {
-    #[prost(message, optional, tag="1")]
-    pub transaction: ::core::option::Option<Transaction>,
+pub struct Transactions {
+    #[prost(message, repeated, tag="1")]
+    pub transactions: ::prost::alloc::vec::Vec<Transaction>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

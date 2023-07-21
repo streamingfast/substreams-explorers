@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package eth.transaction.v1;
 
-message TransactionOption {
-  Transaction transaction = 1;
+message Transactions {
+  repeated Transaction transactions = 1;
 }
 
 message Transaction {

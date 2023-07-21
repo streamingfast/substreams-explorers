@@ -19,6 +19,8 @@ prost = "0.11"
 substreams = "0.5"
 # Use latest from https://crates.io/crates/substreams-ethereum
 substreams-ethereum = "0.9"
+serde_qs = "0.12.0"
+serde = { version = "1.0", features = ["derive"] }
 
 # Required so that ethabi > ethereum-types build correctly under wasm32-unknown-unknown
 [target.wasm32-unknown-unknown.dependencies]

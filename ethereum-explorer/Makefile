@@ -6,6 +6,6 @@ build:
 protogen:
 	substreams protogen ./substreams.yaml --exclude-paths="sf/substreams,google"
 
-.PHONY: package
-package: build
+.PHONY: pack
+pack: build
 	substreams pack substreams.yaml

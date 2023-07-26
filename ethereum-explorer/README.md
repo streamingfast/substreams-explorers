@@ -78,7 +78,7 @@ To run this module, you must provide a transaction hash, so that Substreams can 
 The `4faa877df84080a9d98b1e28294c4680bb141ec27a1a5dee009c3e02dfa65ab7` transaction is at block number `17712040`. In order to avoid iterating over the full blockchain, the following command starts searching at block number `17712038`.
 
 ```bash
-> substreams run -e mainnet.eth.streamingfast.io:443 substreams.yaml map_filter_transaction --start-block 17712038 --stop-block +10
+> substreams run -e mainnet.eth.streamingfast.io:443 substreams.yaml map_filter_transactions --start-block 17712038 --stop-block +10
 Connected (trace ID 9dce06621a0ec353213adeaf9f10ef79)
 Progress messages received: 0 (0/sec)
 Backprocessing history up to requested target block 17712038:

@@ -45,7 +45,7 @@ fn verify_filter_params(params: &TransactionFilterParams) -> Result<(), Vec<subs
         return Err(errors)
     }
 
-    return Ok(())
+    Ok(())
 }
 
 fn apply_filter(transaction: &TransactionTrace, filters: &TransactionFilterParams) -> bool {
@@ -55,7 +55,7 @@ fn apply_filter(transaction: &TransactionTrace, filters: &TransactionFilterParam
         return false;
     }
 
-    return true;
+    true
 }
 
 fn filter_by_parameter(parameter: &Option<String>, transaction_field: &Vec<u8>) -> bool {
@@ -68,5 +68,5 @@ fn filter_by_parameter(parameter: &Option<String>, transaction_field: &Vec<u8>) 
         return true;
     }
 
-    return false;
+    false
 }

@@ -4,5 +4,5 @@ pub fn is_address_valid(address: &String) -> bool {
         return false;
     }
 
-    return true;
+    true
 }

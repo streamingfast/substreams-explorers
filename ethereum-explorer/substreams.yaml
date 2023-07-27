@@ -39,5 +39,5 @@ modules:
       type: proto:eth.event.v1.Events
 
 params:
-  map_filter_transactions: "to=0xae0Ee0A63A2cE6BaeEFFE56e7714FB4EFE48D419"
-  map_contract_events: "0x6e60bCdF52078A250932CF9FeC174c5F67348845"  
+  map_filter_transactions: "to=0xdAC17F958D2ee523a2206206994597C13D831ec7"
+  map_contract_events: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"  

@@ -14,12 +14,13 @@ The modules in this repository answer some interesting questions when developing
 
 For every block, the `map_block_meta` module retrieves the most relevant information of the block (number, hash, and parent hash).
 
-### How Can You Retrieve a Specific Transaction By Its Hash?
+### How Can You Retrieve Transactions By Their From or To Fields?
 
-Given a transaction hash parameter (`tx_hash`), the `map_filter_transaction` filters a transaction among all transactions in the blockchain. This involves:
+Given any combination of two parameters (`from` and `to`), the `map_filter_transactions` filters a transaction among all transactions in the blockchain. This involves:
 
+1. Providing the filters (only the `from` fields, only the `to` field, both `from` and `to` fields, or none)
 1. Iterating over all the transactions.
-2. Filter the transactions, where the `hash` field is equal to the hash parameter (`hash == tx_hash`).
+2. Filter the transactions, according to the parameters provided. For example, `from == tx_from`, `from == tx_from and to == tx_to`.
 
 ### How Can You Retrieve All the Events for a Specific Smart Contract?
 
@@ -71,51 +72,190 @@ Backprocessing history up to requested target block 17712040:
 all done
 ```
 
-### Running the "map_filter_transaction" Module
+### Running the "map_filter_transactions" Module
 
 To run this module, you must provide a transaction hash, so that Substreams can filter the transactions accordingly. The Substreams manifest (`substreams.yaml`) contains a default transaction hash (`4faa877df84080a9d98b1e28294c4680bb141ec27a1a5dee009c3e02dfa65ab7`) in the `params` section, which you can update.
+
+This module allows you to filter transactions by two fields: `from` (the address that created the transaction) and `to` (the address that received the transaction). The Substreams manifest (`substreams.yaml`) contains a sample filter in the `params` section:
+
+yml
+```
+map_filter_transactions: "to=0xdAC17F958D2ee523a2206206994597C13D831ec7"
+``` 
+This filter only returns the transactions received by the USDT contract address (`0xdAC17F958D2ee523a2206206994597C13D831ec7`). Other possibilities for the filter include:
+
+- Using just `from`: `map_filter_transactions: "from=0xdAC17F958D2ee523a2206206994597C13D831ec7"`
+- Using `from` and `to`: `map_filter_transactions: "from=0x1A384fE78e92F3e41e1B21ad79CB93A557Ab4EfD&to=0xdAC17F958D2ee523a2206206994597C13D831ec7"`
+- Without filters (returns all the transactions): remove the `map_filter_transactions` entry in the `params` section of the manifest.
 
 The `4faa877df84080a9d98b1e28294c4680bb141ec27a1a5dee009c3e02dfa65ab7` transaction is at block number `17712040`. In order to avoid iterating over the full blockchain, the following command starts searching at block number `17712038`.
 
 ```bash
-> substreams run -e mainnet.eth.streamingfast.io:443 substreams.yaml map_filter_transactions --start-block 17712038 --stop-block +10
-Connected (trace ID 9dce06621a0ec353213adeaf9f10ef79)
+> substreams run -e mainnet.eth.streamingfast.io:443 substreams.yaml map_filter_transactions --start-block 17712038 --stop-block +3
+Connected (trace ID 5d4ab3248f19fa87052f523259353ff2)
 Progress messages received: 0 (0/sec)
 Backprocessing history up to requested target block 17712038:
 (hit 'm' to switch mode)
 
 ----------- BLOCK #17,712,038 (b96fc7e71c0daf69b19211c45fbb5c201f4356fb2b5607500b7d88d298599f5b) ---------------
------------ BLOCK #17,712,039 (1385f853d28b16ad7ebc5d51b6f2ef6d43df4b57bd4c6fe4ef8ccb6f266d8b91) ---------------
------------ BLOCK #17,712,040 (31ad07fed936990d3c75314589b15cbdec91e4cc53a984a43de622b314c38d0b) ---------------
 {
-  "@module": "map_filter_transaction",
-  "@block": 17712040,
-  "@type": "eth.transaction.v1.TransactionOption",
+  "@module": "map_filter_transactions",
+  "@block": 17712038,
+  "@type": "eth.transaction.v1.Transactions",
   "@data": {
-    "transaction": {
-      "from": "e93685f3bba03016f02bd1828badd6195988d950",
-      "to": "902f09715b6303d4173037652fa7377e5b98089e",
-      "hash": "4faa877df84080a9d98b1e28294c4680bb141ec27a1a5dee009c3e02dfa65ab7"
-    }
+    "transactions": [
+      {
+        "from": "b6692f7ae54e89da0269c1bfd685ccdfd41d2bf7",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "933b74565234ac9ca8389f7a49fad80099abf1be77e4bef5af69ade30127f30e"
+      },
+      {
+        "from": "0543ba40d4b8b33dc5f7d163f41c6dc54cf1d923",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "51071d7a94fc6ecfec2aba477c26ff5098db3e36a287d43d13b763b3118b160b"
+      },
+      {
+        "from": "09e52cbb57dce8cd2836effc44686b6008a84914",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "806ef36a1e022d52d00a288bc150676af0cb2bad6b5500378c8fc7253a0434fa"
+      },
+      {
+        "from": "2f13d388b85e0ecd32e7c3d7f36d1053354ef104",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "0a9a5707b5d4047b1e44de9283f0c88606eac49b4eb132a61df0dffc20668ad0"
+      },
+      {
+        "from": "4fac9d83ffad797072db8bd72cc544ad5ec45e4f",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "8466f371eed9b742a2ed869213dde10661e3df22366e258e09f68e37ca47b2c1"
+      },
+      {
+        "from": "48c04ed5691981c42154c6167398f95e8f38a7ff",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "571670afd47e29fe901c1b17ed21fca6088cc9540efd684c5b7b4c1c1e748612"
+      },
+      {
+        "from": "4c8e30406f5dbedfaa18cb6b9d0484cd5390490a",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "558031630b43c8c61e36d742a779f967f3f0102fa290111f6f6f9c2acaadf3ea"
+      }
+    ]
   }
 }
 
------------ BLOCK #17,712,041 (1af541642176c51580b54de214e955fba8bf1b82af569b81d4038956f2402a41) ---------------
------------ BLOCK #17,712,042 (43c6ebe5b89dd689a9f07468a04d0faf5274a46d0763056ea53b8b1e5ac32148) ---------------
------------ BLOCK #17,712,043 (2457f742913dbbdb171a8d8cc3b1ef8a383f8f547982700a646aa97581bfaeb8) ---------------
------------ BLOCK #17,712,044 (af7abef4f80d7c6f3111e761bb86f305e9847e544fb36b55ba5b64e6103bd5d3) ---------------
------------ BLOCK #17,712,045 (db4664944f7ca8aed5de798bf74ebbdbbeda60e58316b4291bfec61c7287fb17) ---------------
------------ BLOCK #17,712,046 (d9bce9b9210b7deb746720435d1eca99b87fe17aaf7d5055fcd54959e0c9932e) ---------------
------------ BLOCK #17,712,047 (3a5ffab8dacbaf89e10b66e9d2f7ebe65bddae4dcb5e5e8739f8b938f16f98ec) ---------------
+----------- BLOCK #17,712,039 (1385f853d28b16ad7ebc5d51b6f2ef6d43df4b57bd4c6fe4ef8ccb6f266d8b91) ---------------
+{
+  "@module": "map_filter_transactions",
+  "@block": 17712039,
+  "@type": "eth.transaction.v1.Transactions",
+  "@data": {
+    "transactions": [
+      {
+        "from": "75e89d5979e4f6fba9f97c104c2f0afb3f1dcb88",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "43e0e1b6315c4cc1608d876f98c9bbf09f2a25404aabaeac045b5cc852df0e85"
+      },
+      {
+        "from": "75e89d5979e4f6fba9f97c104c2f0afb3f1dcb88",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "619d94c33b027df694cbf32659aae51743623b4d1cb11c69d7d0e95cad63b712"
+      },
+      {
+        "from": "75e89d5979e4f6fba9f97c104c2f0afb3f1dcb88",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "027cccdba1a127bcfb5bb39b5d89e3552e83c8c3c6dd13cf779d7720241e71b9"
+      },
+      {
+        "from": "3d1d8a1d418220fd53c18744d44c182c46f47468",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "762350dcf3ab62ad515331436ce952ba5b3641bbf87c7d56c1e8a9f21473875c"
+      },
+      {
+        "from": "a45c27ef3df487525b33a70cb0020de792dc7a3f",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "b9e08dfe7b1f4971ea96d1424c32548028bdeb62b2ee7f6775dd55d05c4d4ad6"
+      },
+      {
+        "from": "9696f59e4d72e237be84ffd425dcad154bf96976",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "44f36363290969d8b581bb9a856bc9f2ca9a64e4a12e4db054927a45795480fa"
+      },
+      {
+        "from": "e074f1967080cd7b9352c8cbe2d1d9cd121d4daf",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "8795aa5088fb13a21048c592316ad7da850a8f80f3ce417bc4d7d2bbeca3f596"
+      },
+      {
+        "from": "fb8131c260749c7835a08ccbdb64728de432858e",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "0a907108aecaf909452f7035070a28f9cad6c51896763e760ea1f544a9b9edf3"
+      },
+      {
+        "from": "e41febca31f997718d2ddf6b21b9710c5c7a3425",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "45c03fcbefcce9920806dcd7d638cef262ad405f8beae383fbc2695ad4bc9b1b"
+      }
+    ]
+  }
+}
+
+----------- BLOCK #17,712,040 (31ad07fed936990d3c75314589b15cbdec91e4cc53a984a43de622b314c38d0b) ---------------
+{
+  "@module": "map_filter_transactions",
+  "@block": 17712040,
+  "@type": "eth.transaction.v1.Transactions",
+  "@data": {
+    "transactions": [
+      {
+        "from": "48c04ed5691981c42154c6167398f95e8f38a7ff",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "137799eea9fa8ae410c913e16ebc5cc8a01352a638f3ce6f3f29a283ad918987"
+      },
+      {
+        "from": "7c0a7899f69a7034325ffee90355906cf72aeebb",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "132fc93b8a155c614001665a40381c8de9ad7519034352628c075e17a06d884b"
+      },
+      {
+        "from": "180277c2f8bd489a4e27e261c6fbca079b6fa58f",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "06e74e08b51a0c03219c3aa12a871595516c1d466611ed848ea2ae8cbfb083ea"
+      },
+      {
+        "from": "1440ec793ae50fa046b95bfeca5af475b6003f9e",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "83862ea45a6f777acd81a3469c54e347d3eb527cbee9fb673c6e312f7ae6fb83"
+      },
+      {
+        "from": "89e51fa8ca5d66cd220baed62ed01e8951aa7c40",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "1b9e5059181ca90969ee423beea3073cf99faf8a91b73890303531ebd6c197ec"
+      },
+      {
+        "from": "89e51fa8ca5d66cd220baed62ed01e8951aa7c40",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "ca1750068bee961ccd2e45679c9d9dadc5ba93fd3212c0f31361d39abe3ed36c"
+      },
+      {
+        "from": "82cbcb64a2eb51622fb847c9c957fdac532712ac",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "284b6359cf66a010798738bb764f5cd015658e8f59273a49e19a855731f22bb8"
+      },
+      {
+        "from": "f89d7b9c864f589bbf53a82105107622b35eaa40",
+        "to": "dac17f958d2ee523a2206206994597c13d831ec7",
+        "hash": "0544143b459969c9ed36741533fba70d6ea7069f156d2019d5362c06bf8d887f"
+      }
+    ]
+  }
+}
+
 all done
 ```
 
-As you can see, the Substreams does not provide an output for the blocks where the transaction is not present.
-You can check out the transaction at [Etherscan](https://etherscan.io/tx/0x4faa877df84080a9d98b1e28294c4680bb141ec27a1a5dee009c3e02dfa65ab7).
+### Running the "map_contract_events" Module
 
-### Running the "map_filter_transaction" Module
-
-To run this module, you must provide the address of a smart contract. By default, the `params` section of the Substreams manifest contains the `bc4ca0eda7647a8ab7c2061c2e118a18a936f13d` address, corresponding to the Bore Yacht Club smart contract. You can change this address to track any smart contract.
+To run this module, you must provide the address of a smart contract. By default, the `params` section of the Substreams manifest contains the `0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d` address, corresponding to the Bore Yacht Club smart contract. You can change this address to track any smart contract.
 
 The logs of a smart contract might be split across thousands of Ethereum blocks, so for testing purposes, and to avoid iterating over the full blockchain, the following command limits starts searching at block number `17717995`.
 

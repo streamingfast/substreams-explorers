@@ -28,5 +28,5 @@ fn verify_parameter(address: &String) -> Result<(), Error> {
         return Err(anyhow!("Contract address is not valid"));
     }
 
-    return Ok(());
+    Ok(())
 }

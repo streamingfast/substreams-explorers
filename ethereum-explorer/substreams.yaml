@@ -39,5 +39,7 @@ modules:
       type: proto:eth.event.v1.Events
 
 params:
+  # Filtering transactions with to = 0xdAC17F958D2ee523a2206206994597C13D831ec7 (USDT contract address)
   map_filter_transactions: "to=0xdAC17F958D2ee523a2206206994597C13D831ec7"
-  map_contract_events: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"  
+  # Getting the logs of the BoredApeYachtClub smart contract
+  map_contract_events: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"

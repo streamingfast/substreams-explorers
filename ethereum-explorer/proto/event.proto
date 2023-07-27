@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package eth.event.v1;
+
+message Events {
+    repeated Event events = 1;
+}
+
+message Event {
+    string address = 1;
+    repeated string topics = 2;
+    string tx_hash = 3;
+}

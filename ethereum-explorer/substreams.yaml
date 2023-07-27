@@ -1,0 +1,45 @@
+specVersion: v0.1.0
+package:
+  name: "substreams_template"
+  version: v0.1.0
+
+protobuf:
+  files:
+    - transaction.proto
+    - event.proto
+    - block_meta.proto
+  importPaths:
+    - ./proto
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: ./target/wasm32-unknown-unknown/release/substreams.wasm
+
+modules:
+  - name: map_block_meta
+    kind: map
+    inputs:
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:eth.block_meta.v1.BlockMeta
+  - name: map_filter_transactions
+    kind: map
+    inputs:
+      - params: string
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:eth.transaction.v1.Transactions
+  - name: map_contract_events
+    kind: map
+    inputs:
+      - params: string
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:eth.event.v1.Events
+
+params:
+  # Filtering transactions with to = 0xdAC17F958D2ee523a2206206994597C13D831ec7 (USDT contract address)
+  map_filter_transactions: "to=0xdAC17F958D2ee523a2206206994597C13D831ec7"
+  # Getting the logs of the BoredApeYachtClub smart contract
+  map_contract_events: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"

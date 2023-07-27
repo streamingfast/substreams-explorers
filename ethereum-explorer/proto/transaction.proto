@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package eth.transaction.v1;
+
+message Transactions {
+  repeated Transaction transactions = 1;
+}
+
+message Transaction {
+  string from = 1;
+  string to = 2;
+  string hash = 3;
+}

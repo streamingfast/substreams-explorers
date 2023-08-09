@@ -73,7 +73,6 @@ fn apply_filter(transaction: &TransactionTrace, filters: &TransactionFilterParam
     {
         return false;
     }
-
     true
 }
 

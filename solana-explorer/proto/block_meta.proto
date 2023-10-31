@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package sol.block_meta.v1;
+
+message BlockMeta {
+  uint64 slot = 1;
+  string hash = 2;
+  string parent_hash = 3;
+}

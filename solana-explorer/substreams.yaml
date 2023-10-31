@@ -1,0 +1,45 @@
+specVersion: v0.1.0
+package:
+  name: "solana_explorer"
+  version: v0.1.0
+
+imports:
+  solana: https://github.com/streamingfast/firehose-solana/releases/download/v0.1.1/solana-v0.1.1.spkg
+
+protobuf:
+  files:
+    - block_meta.proto
+    - program_instructions.proto
+  importPaths:
+    - ./proto
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: ./target/wasm32-unknown-unknown/release/substreams.wasm
+
+modules:
+  - name: map_block_meta
+    kind: map
+    inputs:
+      - source: sf.solana.type.v1.Block
+    output:
+      type: proto:sol.block_meta.v1.BlockMeta
+
+  - name: map_block_full
+    kind: map
+    inputs:
+      - source: sf.solana.type.v1.Block
+    output:
+      type: proto:sf.solana.type.v1.Block
+
+  - name: map_filter_instructions
+    kind: map
+    inputs:
+      - params: string
+      - source: sf.solana.type.v1.Block
+    output:
+      type: proto:sol.programs.v1.Instructions
+
+params:
+  map_filter_instructions: "program_id=Stake11111111111111111111111111111111111111"

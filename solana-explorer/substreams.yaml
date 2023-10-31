@@ -2,6 +2,8 @@ specVersion: v0.1.0
 package:
   name: "solana_explorer"
   version: v0.1.0
+  doc: |
+    This packages holds simple modules to allow you to explore the Solana data model.
 
 imports:
   solana: https://github.com/streamingfast/firehose-solana/releases/download/v0.1.1/solana-v0.1.1.spkg
@@ -19,19 +21,23 @@ binaries:
     file: ./target/wasm32-unknown-unknown/release/substreams.wasm
 
 modules:
-  - name: map_block_meta
-    kind: map
-    inputs:
-      - source: sf.solana.type.v1.Block
-    output:
-      type: proto:sol.block_meta.v1.BlockMeta
-
   - name: map_block_full
     kind: map
     inputs:
       - source: sf.solana.type.v1.Block
     output:
       type: proto:sf.solana.type.v1.Block
+    doc: |
+      `map_block_full` allows you to view a complete block, as received by a Substreams module
+
+  - name: map_block_meta
+    kind: map
+    inputs:
+      - source: sf.solana.type.v1.Block
+    output:
+      type: proto:sol.block_meta.v1.BlockMeta
+    doc: |
+      `map_block_meta` allows you to view a basic information about a block
 
   - name: map_filter_instructions
     kind: map
@@ -40,6 +46,8 @@ modules:
       - source: sf.solana.type.v1.Block
     output:
       type: proto:sol.programs.v1.Instructions
+    doc: |
+      `map_filter_instructions` allows you to get instructions executed by a certain `program_id`, and returns the raw Instruction data model.
 
 params:
   map_filter_instructions: "program_id=Stake11111111111111111111111111111111111111"

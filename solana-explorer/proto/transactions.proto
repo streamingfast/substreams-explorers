@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package sol.transactions.v1;
+
+
+message Instructions {
+  repeated Instruction instructions = 1;
+}
+
+message Instruction {
+  string program_id = 1;
+  repeated string accounts = 2;
+  string data = 3;
+}
+
+message Transactions {
+  repeated Transaction transactions = 1;
+}
+
+message Transaction {
+  repeated string signatures = 1;
+
+  repeated Instruction instructions = 2;
+}

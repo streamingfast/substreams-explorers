@@ -87,8 +87,6 @@ params:
           "SysvarRent111111111111111111111111111111111"
         ],
         "data": "1111jgvBfvfPuc2GLifVk9vJpXFTL5urtkjvyJHP6p7TqNR9G47jkYe3RGab9rya96yeGycaY8SVbcpaBkRLZonTJL7y4GyDWwyEmYmvNz74HWew5cPsky18ppTT1WyqmjxvmznzUWXfRogakvUscqJ8C54tP",
-        "slotNumber": "153000012",
-        "blockHash": "EtMvzAbrkdWpawfP7ozcL86yocFNYxvWvtS4f8pMrajD"
       },
       {
         "programId": "Stake11111111111111111111111111111111111111",
@@ -101,8 +99,6 @@ params:
           "GJYanGsBPyRUgAYkXBTyBYdZiH5wppXoJys9HaJwitzk"
         ],
         "data": "3xyZh",
-        "slotNumber": "153000012",
-        "blockHash": "EtMvzAbrkdWpawfP7ozcL86yocFNYxvWvtS4f8pMrajD"
       }
     ]
   }
@@ -138,8 +134,6 @@ params:
           "4sUsH6ZzqWU2g1xzM8udFErB4qN3GSL1QbNjiSHc3QxN"
         ],
         "data": "8QwQj",
-        "slotNumber": "153000028",
-        "blockHash": "5xj9iYo6nuAiXvPFDUieUKBcRLbg9rz5qiBQg2NYjyBv"
       }
     ]
   }
@@ -166,5 +160,82 @@ params:
 ----------- BLOCK #153,000,047 (6MqMSHpKjwavQp4FRs5wAGEbKqkp8D82EH8KFkF2YXyH) ---------------
 ----------- BLOCK #153,000,048 (2E8ncPZMAqa5RKPvEUAMt6abLNcDZM7J6nawyaiSboGD) ---------------
 ----------- BLOCK #153,000,049 (GyG9Rw4Mo8sYb9WLzz8oqHgV3k4sYa3UWeveGG2uLGWX) ---------------
+all done
+```
+
+### Running the "map_filter_transactions" Module
+
+To run this module, you must provide a transaction signature value in the parameters in your substreams.yaml manifest.
+
+This example will use the default `21ED2HBGuLUwgbaBb77cGwFR8MkVQfjR9KszzCb7jZkeSysJkHAVew6RaaBh3r1zTefpdq9Kf5geFp19P3nUXB3t` program.
+
+```yaml
+params:
+  map_filter_transactions: "signature=21ED2HBGuLUwgbaBb77cGwFR8MkVQfjR9KszzCb7jZkeSysJkHAVew6RaaBh3r1zTefpdq9Kf5geFp19P3nUXB3t"
+```
+
+```bash
+substreams run -e mainnet.sol.streamingfast.io:443 ./solana-explorer-v0.1.0.spkg map_filter_transactions -s 153000000 -t +30
+Connected (trace ID 27d4c57714280d824e0cd37f7cd8dc17)
+Progress messages received: 0 (0/sec)
+Backprocessing history up to requested target block 153000028:
+(hit 'm' to switch mode)
+----------- BLOCK #153,000,000 (ENZNjBKCxXQqgFxX63T6kn7DJwc7fQiwy3W3vyehtEGA) ---------------
+----------- BLOCK #153,000,001 (8q2n7y3ozKWUWrAGVbNc3wrkxdmT6iSdgf8CHgqrvSv1) ---------------
+----------- BLOCK #153,000,002 (AfE4vBBsvcCXzdexP4sX9byHYrdZsUpd2GTTTTvkShxu) ---------------
+----------- BLOCK #153,000,003 (H5RZGAShGm7sMW6NvaPY3TsX36WEvugZ64Y1gSBRPyLV) ---------------
+----------- BLOCK #153,000,004 (Egf4PFv5636rycdntsBfi26Bou2Mt3Z5UAgH4hBbkZat) ---------------
+----------- BLOCK #153,000,005 (DmkkhPG2RDWkJnLbSiG1XTUotJVpLbjqBeRa9FoQB3Tg) ---------------
+----------- BLOCK #153,000,006 (Dy9YQQrTed69j7fsy7z3F3sa1x34T4CGmCVQVFoWobRE) ---------------
+----------- BLOCK #153,000,007 (3bHscyCgsvzLo6u4CpvCzJe7ELkuf9k8MSwHyLUtif9L) ---------------
+----------- BLOCK #153,000,008 (CkDjN7c4hjYqtuYXH9Vw8MTmk29XjgMnbEtAzrjbyjnU) ---------------
+----------- BLOCK #153,000,009 (8SVnGrwbwpAWCPdRXKgyNCvJRedEqmYnLazB3mB7Rehg) ---------------
+----------- BLOCK #153,000,010 (BTVDWyLK26P2CBjGjCvsHwNqaUcn15xUauwCJmkCSAx1) ---------------
+----------- BLOCK #153,000,011 (DVzw63xEAHmWTdo9iA9ca7yTiaondmGGvr4VczQnFhbn) ---------------
+----------- BLOCK #153,000,012 (EtMvzAbrkdWpawfP7ozcL86yocFNYxvWvtS4f8pMrajD) ---------------
+----------- BLOCK #153,000,013 (7NVSAZZefTrNkK7JSg227yoponB6Tig27PXnEm7kQFJf) ---------------
+----------- BLOCK #153,000,014 (3nfE81F85ggdWxjRZUENBPhvXStAJsVxnwrQ99VcTMME) ---------------
+----------- BLOCK #153,000,015 (4N3sqbbJEZobfu1pL6rZEZf6Kpx2WYB8fHm1hbqASa6S) ---------------
+----------- BLOCK #153,000,016 (812uX2UUSvvep5APemSmTDk4bDnMkZnJtMBSa6enBmFN) ---------------
+----------- BLOCK #153,000,017 (CXsKxq7LmJVW6P3YjBVbrfgDiyMyzYDX5jNhgdsryMfv) ---------------
+----------- BLOCK #153,000,018 (FnVqabMm8VEKCr9pchMFxipxSssNeioxx7bCaqyGbzgX) ---------------
+----------- BLOCK #153,000,019 (J49iZE979hGtK4hnxUigpxQiNsU3oNq9UMMJqknGLJVT) ---------------
+----------- BLOCK #153,000,020 (GJ1BNqsBtyxucvqkipkZDaHW2KGdsU3sR41ebmCxth24) ---------------
+----------- BLOCK #153,000,021 (Bxc99wYm1heyzfY1ViXNnJFmf81BFHzLKrwizW5TPemn) ---------------
+----------- BLOCK #153,000,022 (2iLweM1VHWnkmXpF7G2fHr52zGuwsEjFXd8ZtpwwUcDw) ---------------
+----------- BLOCK #153,000,023 (6JpfNdC2qTErHpXd8e74E5aAkm11USA2rJJbCvQdtHyg) ---------------
+----------- BLOCK #153,000,024 (AjN8rk6c8ya5TNYRBUWKUgEYEJceqtJsPMMDdweg4MPR) ---------------
+----------- BLOCK #153,000,025 (F7dvT2mwGusrLmRwdJrGZ7cAXsxq43kHsrKpzeseywwg) ---------------
+----------- BLOCK #153,000,026 (aGdXha9hhhaETuNywV2XY39Y6B719NBZ6xbUzAu3wah) ---------------
+----------- BLOCK #153,000,027 (GfoPvdzekjLV1QHvvHzyVG7xbjajDKA4Ev7gXum2Ry1S) ---------------
+----------- BLOCK #153,000,028 (5xj9iYo6nuAiXvPFDUieUKBcRLbg9rz5qiBQg2NYjyBv) ---------------
+{
+  "@module": "map_filter_transactions",
+  "@block": 153000028,
+  "@type": "sol.transactions.v1.Transactions",
+  "@data": {
+    "transactions": [
+      {
+        "signatures": [
+          "21ED2HBGuLUwgbaBb77cGwFR8MkVQfjR9KszzCb7jZkeSysJkHAVew6RaaBh3r1zTefpdq9Kf5geFp19P3nUXB3t"
+        ],
+        "instructions": [
+          {
+            "programId": "Vote111111111111111111111111111111111111111",
+            "accounts": [
+              "HRfK8kbqCaKYsHk3R8HCtLNDp4aTneq1eSQ9ZrA2Kb2q",
+              "SysvarS1otHashes111111111111111111111111111",
+              "SysvarC1ock11111111111111111111111111111111",
+              "HEJzPiLSg9ty5CGAyJm5y7ef1NPzr1u1aHLYaAMXsgH9"
+            ],
+            "data": "29z5mr1JoRmJYQ6yybpMZZDfJB6dWDGQsB8jimJo3eTNYA7qEJvjo3dwvmP25dQtpxkKPQdEy37P5hDAMoAtGnaE1vGpXq"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+----------- BLOCK #153,000,029 (3LBYvzhWfdtcAwuCvoBzTCkUbpVbckyBFAcJezdScGhP) ---------------
 all done
 ```

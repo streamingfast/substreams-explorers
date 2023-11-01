@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package sol.block_meta.v1;
+package sol.block.v1;
 
 message BlockMeta {
   uint64 slot = 1;

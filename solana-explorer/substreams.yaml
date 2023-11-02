@@ -2,6 +2,7 @@ specVersion: v0.1.0
 package:
   name: "solana_explorer"
   version: v0.1.0
+  url: https://github.com/streamingfast/substreams-explorers/
   image: ./solana.png
   doc: |
     This packages holds simple modules to allow you to explore the Solana data model.

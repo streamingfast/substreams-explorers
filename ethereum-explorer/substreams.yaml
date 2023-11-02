@@ -1,10 +1,16 @@
 specVersion: v0.1.0
 package:
   name: "ethereum_explorer"
+  image: ./ethereum.png
+  url: "http://github.com/streamingfast/substreams-explorers/"
   version: v0.1.0
+  doc: |
+    This packages holds simple modules to allow you to explore the Ethereum data model.  
 
 imports:
   ethereum: https://github.com/streamingfast/firehose-ethereum/releases/download/v1.4.8/ethereum-v1.0.0.spkg
+
+network: mainnet
 
 protobuf:
   files:
@@ -26,6 +32,8 @@ modules:
       - source: sf.ethereum.type.v2.Block
     output:
       type: proto:eth.block_meta.v1.BlockMeta
+    doc: |
+      `map_block_meta` allows you to view a basic information about a block      
 
   - name: map_block_full
     kind: map
@@ -33,6 +41,8 @@ modules:
       - source: sf.ethereum.type.v2.Block
     output:
       type: proto:sf.ethereum.type.v2.Block
+    doc: |
+      `map_block_full` allows you to view a complete block, as received by a Substreams module      
 
   - name: map_filter_transactions
     kind: map
@@ -41,6 +51,8 @@ modules:
       - source: sf.ethereum.type.v2.Block
     output:
       type: proto:eth.transaction.v1.Transactions
+    doc: |
+      `map_filter_transaction` allows you to find a transaction by specifying either `to` or `from` value in the parameters. You might need to scope your search to the blocks you know you are going to find that transaction. Check with your preferred block explorer first.
 
   - name: map_contract_events
     kind: map
@@ -49,6 +61,9 @@ modules:
       - source: sf.ethereum.type.v2.Block
     output:
       type: proto:eth.event.v1.Events
+    doc: |
+      `map_contract_events` allows you to get instructions executed by a certain contract, and returns the raw Event data model.
+      
 
 params:
   # Filtering transactions with to = 0xdAC17F958D2ee523a2206206994597C13D831ec7 (USDT contract address)

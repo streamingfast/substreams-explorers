@@ -61,7 +61,7 @@ modules:
     output:
       type: proto:sol.transactions.v1.Transactions
     doc: |
-      `map_filter_transaction` allows you to find a transaction by hash. You need to scope your search to the blocks you know you're going to find that transaction. Check with your preferred block explorer first.
+      `map_filter_transaction` allows you to find a transaction by hash. You need to scope your search to the blocks you know you are going to find that transaction. Check with your preferred block explorer first.
 
 params:
   map_filter_instructions: "program_id=Stake11111111111111111111111111111111111111"

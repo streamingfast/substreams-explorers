@@ -39,7 +39,7 @@ modules:
     inputs:
       - source: sf.solana.type.v1.Block
     output:
-      type: proto:sol.block_meta.v1.BlockMeta
+      type: proto:sol.block.v1.BlockMeta
     doc: |
       `map_block_meta` allows you to view a basic information about a block
 

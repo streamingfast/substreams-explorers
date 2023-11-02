@@ -5,6 +5,8 @@ package:
   doc: |
     This packages holds simple modules to allow you to explore the Solana data model.
 
+network: solana
+
 imports:
   solana: https://github.com/streamingfast/firehose-solana/releases/download/v0.1.1/solana-v0.1.1.spkg
 

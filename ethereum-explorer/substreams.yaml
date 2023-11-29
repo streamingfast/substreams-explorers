@@ -3,7 +3,7 @@ package:
   name: "ethereum_explorer"
   image: ./ethereum.png
   url: "http://github.com/streamingfast/substreams-explorers/"
-  version: v0.1.0
+  version: v0.1.2
   doc: |
     This packages holds simple modules to allow you to explore the Ethereum data model.  
 

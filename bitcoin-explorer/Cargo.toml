@@ -1,0 +1,24 @@
+[package]
+name = "substreams-bitcoin-explorer"
+version = "0.1.0"
+description = "Substreams showcasing the building blocks of Bitcoin"
+edition = "2021"
+repository = "https://github.com/streamingfast/substreams-explorers"
+license = "Apache 2.0"
+
+[lib]
+name = "substreams"
+crate-type = ["cdylib"]
+
+[dependencies]
+prost = "0.11"
+# Use latest from https://crates.io/crates/substreams
+substreams = "0.5"
+substreams-bitcoin = { version = "1.0.0" }
+anyhow = "1.0"
+
+
+[profile.release]
+lto = true
+opt-level = 's'
+strip = "debuginfo"

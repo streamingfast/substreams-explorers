@@ -1,0 +1,53 @@
+specVersion: v0.1.0
+package:
+  name: "bitcoin_explorer"
+  image: ./bitcoin.png
+  url: "http://github.com/streamingfast/substreams-explorers/"
+  version: v0.1.0
+  doc: |
+    This packages holds simple modules to allow you to explore the Bitcoin data model.  
+
+imports:
+  bitcoin: ../../firehose-bitcoin/substreams/bitcoin-v1.0.0.spkg
+
+network: mainnet
+
+protobuf:
+  files:
+    - block_meta.proto
+    - transaction.proto
+  importPaths:
+    - ./proto
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: ./target/wasm32-unknown-unknown/release/substreams.wasm
+
+modules:
+  - name: map_block_meta
+    kind: map
+    inputs:
+      - source: sf.bitcoin.type.v1.Block
+    output:
+      type: proto:btc.block_meta.v1.BlockMeta
+    doc: |
+      `map_block_meta` allows you to view a basic information about a block      
+
+  - name: map_block_full
+    kind: map
+    inputs:
+      - source: sf.bitcoin.type.v1.Block
+    output:
+      type: proto:sf.bitcoin.type.v1.Block
+    doc: |
+      `map_block_full` allows you to view a complete block, as received by a Substreams module      
+
+  - name: map_transactions
+    kind: map
+    inputs:
+      - source: sf.bitcoin.type.v1.Block
+    output:
+      type: proto:btc.transaction.v1.Transactions
+    doc: |
+      `map_filter_transaction` allows you to find a transaction by specifying either `to` or `from` value in the parameters. You might need to scope your search to the blocks you know you are going to find that transaction. Check with your preferred block explorer first.

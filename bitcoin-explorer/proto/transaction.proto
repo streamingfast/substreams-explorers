@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package btc.transaction.v1;
+
+message Transactions {
+  repeated Transaction transactions = 1;
+}
+
+message Transaction {
+  string hash = 1;
+  uint64 vin_count = 2;
+  uint64 vout_count = 3;
+  double btc_value = 4;
+}

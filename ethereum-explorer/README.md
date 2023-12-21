@@ -20,7 +20,7 @@ Given any combination of two parameters (`from` and `to`), the `map_filter_trans
 
 1. Providing the filters (only the `from` fields, only the `to` field, both `from` and `to` fields, or none)
 1. Iterating over all the transactions.
-2. Filter the transactions, according to the parameters provided. For example, `from == tx_from`, `from == tx_from and to == tx_to`.
+1. Filter the transactions, according to the parameters provided. For example, `from == tx_from`, `from == tx_from and to == tx_to`.
 
 ### How Can You Retrieve All the Events for a Specific Smart Contract?
 
@@ -255,7 +255,7 @@ all done
 
 ### Running the "map_contract_events" Module
 
-To run this module, you must provide the address of a smart contract. By default, the `params` section of the Substreams manifest contains the `0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d` address, corresponding to the Bore Yacht Club smart contract. You can change this address to track any smart contract.
+To run this module, you must provide the address of a smart contract. By default, the `params` section of the Substreams manifest contains the `0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d` address, corresponding to the Bored Ape Yacht Club smart contract. You can change this address to track any smart contract.
 
 The logs of a smart contract might be split across thousands of Ethereum blocks, so for testing purposes, and to avoid iterating over the full blockchain, the following command limits starts searching at block number `17717995`.
 

@@ -228,6 +228,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "num_enum"
+version = "0.7.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "02339744ee7253741199f897151b38e72257d13802d4ee837285cc2990a90845"
+dependencies = [
+ "num_enum_derive",
+]
+
+[[package]]
+name = "num_enum_derive"
+version = "0.7.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "681030a937600a36906c185595136d26abfebb4aa9c65701cefcaf8578bb982b"
+dependencies = [
+ "proc-macro-crate",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.38",
+]
+
+[[package]]
 name = "once_cell"
 version = "1.18.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -266,6 +287,15 @@ checksum = "6c8646e95016a7a6c4adea95bafa8a16baab64b583356217f2c85db4a39d9a86"
 dependencies = [
  "proc-macro2",
  "syn 1.0.109",
+]
+
+[[package]]
+name = "proc-macro-crate"
+version = "3.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6d37c51ca738a55da99dc0c4a34860fd675453b8b36209178c2249bb13651284"
+dependencies = [
+ "toml_edit",
 ]
 
 [[package]]
@@ -456,10 +486,11 @@ dependencies = [
 
 [[package]]
 name = "substreams-solana"
-version = "0.10.2"
-source = "git+https://github.com/streamingfast/substreams-solana#c00176f6c3b45ddb17153d980762caa693c8cf18"
+version = "0.11.1"
+source = "git+https://github.com/streamingfast/substreams-solana?branch=master#1f66cc3081f61ad1189dc814cb82096ae5ac4b3b"
 dependencies = [
  "anyhow",
+ "num_enum",
  "substreams",
  "substreams-solana-core",
  "substreams-solana-macro",
@@ -467,8 +498,8 @@ dependencies = [
 
 [[package]]
 name = "substreams-solana-core"
-version = "0.10.2"
-source = "git+https://github.com/streamingfast/substreams-solana#c00176f6c3b45ddb17153d980762caa693c8cf18"
+version = "0.11.1"
+source = "git+https://github.com/streamingfast/substreams-solana?branch=master#1f66cc3081f61ad1189dc814cb82096ae5ac4b3b"
 dependencies = [
  "bs58",
  "prost",
@@ -490,14 +521,26 @@ dependencies = [
  "serde_qs",
  "substreams",
  "substreams-solana",
+ "substreams-solana-program-instructions",
 ]
 
 [[package]]
 name = "substreams-solana-macro"
-version = "0.10.2"
-source = "git+https://github.com/streamingfast/substreams-solana#c00176f6c3b45ddb17153d980762caa693c8cf18"
+version = "0.11.1"
+source = "git+https://github.com/streamingfast/substreams-solana?branch=master#1f66cc3081f61ad1189dc814cb82096ae5ac4b3b"
 dependencies = [
  "bs58",
+]
+
+[[package]]
+name = "substreams-solana-program-instructions"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b2d2eac3fee28a079bd3af5573bb6d43cf9667d89ce577fc7dd40113bb31e9e1"
+dependencies = [
+ "anyhow",
+ "num_enum",
+ "substreams",
 ]
 
 [[package]]
@@ -553,6 +596,23 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.38",
+]
+
+[[package]]
+name = "toml_datetime"
+version = "0.6.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3550f4e9685620ac18a50ed434eb3aec30db8ba93b0287467bca5826ea25baf1"
+
+[[package]]
+name = "toml_edit"
+version = "0.21.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d34d383cd00a163b4a5b85053df514d45bc330f6de7737edfe0a93311d1eaa03"
+dependencies = [
+ "indexmap",
+ "toml_datetime",
+ "winnow",
 ]
 
 [[package]]
@@ -650,3 +710,12 @@ name = "windows_x86_64_msvc"
 version = "0.48.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ed94fce61571a4006852b7389a063ab983c02eb1bb37b47f8272ce92d06d9538"
+
+[[package]]
+name = "winnow"
+version = "0.5.34"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b7cf47b659b318dccbd69cc4797a39ae128f533dce7902a1096044d1967b9c16"
+dependencies = [
+ "memchr",
+]

@@ -41,7 +41,6 @@ modules:
     output:
       type: proto:sf.solana.type.v1.Block
 
-
   - name: map_block_meta
     kind: map
     inputs:

@@ -34,7 +34,7 @@ modules:
     doc: |
       `map_block_full` allows you to view a complete block, as received by a Substreams module
 
-  - name: map_block_full_no_vote
+  - name: map_block_without_votes
     kind: map
     inputs:
       - source: sf.solana.type.v1.Block

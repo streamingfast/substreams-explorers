@@ -1,6 +1,7 @@
 use substreams_solana::pb::sf::solana::r#type::v1::{Block, ConfirmedTransaction};
 
-static VOTE_INSTRUCTION: &[u8] = b"Vote111111111111111111111111111111111111111";
+// Vote111111111111111111111111111111111111111
+static VOTE_INSTRUCTION: &'static [u8] = &[7, 97, 72, 29, 53, 116, 116, 187, 124, 77, 118, 36, 235, 211, 189, 179, 216, 53, 94, 115, 209, 16, 67, 252, 13, 163, 83, 128, 0, 0, 0, 0];
 
 #[substreams::handlers::map]
 fn map_block_without_votes(block: Block) -> Result<Block, substreams::errors::Error> {

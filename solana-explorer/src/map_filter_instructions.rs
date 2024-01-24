@@ -14,11 +14,11 @@ fn map_filter_instructions(params: String, blk: Block) -> Result<Instructions, V
 
     let mut instructions : Vec<Instruction> = Vec::new();
 
-    blk.transactions.iter().for_each(|tx| {
+    blk.transactions_owned().into_iter().for_each(|tx| {
         let msg = tx.transaction.clone().unwrap().message.unwrap();
-        let acct_keys = msg.account_keys.as_slice();
+        let acct_keys = tx.resolved_accounts();
         let insts : Vec<Instruction> = msg.instructions.iter()
-            .filter(|inst| apply_filter(inst, &filters, acct_keys.to_vec()))
+            .filter(|inst| apply_filter(inst, &filters, &acct_keys))
             .map(|inst| {
             Instruction {
                 program_id: bs58::encode(acct_keys[inst.program_id_index as usize].to_vec()).into_string(),
@@ -44,7 +44,7 @@ fn parse_filters_from_params(params: String) -> Result<InstructionFilterParams, 
     Ok(filters)
 }
 
-fn apply_filter(instruction: &CompiledInstruction, filters: &InstructionFilterParams, account_keys: Vec<Vec<u8>>) -> bool {
+fn apply_filter(instruction: &CompiledInstruction, filters: &InstructionFilterParams, account_keys: &Vec<&Vec<u8>>) -> bool {
     if filters.program_id.is_none() {
         return true;
     }

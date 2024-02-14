@@ -9,46 +9,39 @@ struct InstructionFilterParams {
 }
 
 #[substreams::handlers::map]
-fn map_filter_instructions(params: String, blk: Block) -> Result<Instructions, Vec<substreams::errors::Error>> {
+fn map_filter_instructions(params: String, blk: Block) -> Result<Instructions, substreams::errors::Error> {
     let filters = parse_filters_from_params(params)?;
 
-    let mut instructions : Vec<Instruction> = Vec::new();
-
-    blk.transactions_owned().into_iter().for_each(|tx| {
-        let msg = tx.transaction.clone().unwrap().message.unwrap();
+    let instructions : Vec<Instruction> = blk.transactions().flat_map(|tx| {
+        let msg = tx.transaction.as_ref().unwrap().message.as_ref().unwrap();
         let acct_keys = tx.resolved_accounts();
-        let insts : Vec<Instruction> = msg.instructions.iter()
+
+        msg.instructions.iter()
             .filter(|inst| apply_filter(inst, &filters, &acct_keys))
             .map(|inst| {
             Instruction {
                 program_id: bs58::encode(acct_keys[inst.program_id_index as usize].to_vec()).into_string(),
                 accounts: inst.accounts.iter().map(|acct| bs58::encode(acct_keys[*acct as usize].to_vec()).into_string()).collect(),
-                data: bs58::encode(inst.data.clone()).into_string(),
+                data: bs58::encode(&inst.data).into_string(),
             }
-        }).collect();
-        instructions.extend(insts);
-    });
+        }).collect::<Vec<_>>()
+    }).collect();
 
     Ok(Instructions { instructions })
 }
 
-fn parse_filters_from_params(params: String) -> Result<InstructionFilterParams, Vec<substreams::errors::Error>> {
-    let parsed_result = serde_qs::from_str(&params);
-    if parsed_result.is_err() {
-        return Err(Vec::from([anyhow!("Unexpected error while parsing parameters")]));
+fn parse_filters_from_params(params: String) -> Result<InstructionFilterParams, substreams::errors::Error> {
+    match serde_qs::from_str(&params) {
+        Ok(filters) => Ok(filters),
+        Err(e) => Err(anyhow!("Failed to parse filters from params: {}", e))
     }
-
-    let filters = parsed_result.unwrap();
-    //todo: verify_filters(&filters)?;
-
-    Ok(filters)
 }
 
 fn apply_filter(instruction: &CompiledInstruction, filters: &InstructionFilterParams, account_keys: &Vec<&Vec<u8>>) -> bool {
     if filters.program_id.is_none() {
         return true;
     }
-    let program_id_filter = filters.program_id.clone().unwrap();
+    let program_id_filter = filters.program_id.as_ref().unwrap();
 
     let program_account_key = account_keys.get(instruction.program_id_index as usize);
     if program_account_key.is_none() {
@@ -56,7 +49,7 @@ fn apply_filter(instruction: &CompiledInstruction, filters: &InstructionFilterPa
     }
     let program_account_key_val = bs58::encode(program_account_key.unwrap()).into_string();
 
-    if program_account_key_val != program_id_filter {
+    if &program_account_key_val != program_id_filter {
         return false;
     }
 

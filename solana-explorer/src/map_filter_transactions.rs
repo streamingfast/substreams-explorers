@@ -18,7 +18,7 @@ fn map_filter_transactions(params: String, blk: Block) -> Result<Transactions, V
         .iter()
         .filter(|tx| apply_filter(tx, &filters))
         .for_each(|tx| {
-            let msg = tx.transaction.clone().unwrap().message.unwrap();
+            let msg = tx.transaction.as_ref().unwrap().message.as_ref().unwrap();
             let acct_keys = tx.resolved_accounts();
 
             let insts: Vec<Instruction> = msg
@@ -31,14 +31,14 @@ fn map_filter_transactions(params: String, blk: Block) -> Result<Transactions, V
                         .iter()
                         .map(|acct| bs58::encode(acct_keys[*acct as usize].to_vec()).into_string())
                         .collect(),
-                    data: bs58::encode(inst.data.clone()).into_string(),
+                    data: bs58::encode(&inst.data).into_string(),
                 })
                 .collect();
 
             let t = Transaction {
                 signatures: tx
                     .transaction
-                    .clone()
+                    .as_ref()
                     .unwrap()
                     .signatures
                     .iter()

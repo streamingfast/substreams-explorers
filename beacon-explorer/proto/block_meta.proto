@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package beacon.block_meta.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message BlockMeta {
+  uint64 slot = 1;
+  string root = 2;
+  string state_root = 3;
+  Spec spec = 4;
+  google.protobuf.Timestamp timestamp = 5;
+}
+
+enum Spec {
+  UNSPECIFIED = 0;
+  PHASE0 = 1;
+  ALTAIR = 2;
+  BELLATRIX = 3;
+  CAPELLA = 4;
+  DENEB = 5;
+}

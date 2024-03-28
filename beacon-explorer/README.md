@@ -18,13 +18,13 @@ The substreams package in this repository provides the following substreams modu
 
 First, generate the Protobuf code, which is the output of the Substreams:
 
-```
+```bash
 > make protogen
 ```
 
 Then, build the Rust code using the `cargo` command-line tool:
 
-```
+```bash
 > make build
 ```
 
@@ -32,7 +32,7 @@ Then, build the Rust code using the `cargo` command-line tool:
 
 And now you can stream the corresponding substreams modules:
 
-```
+```bash
 > make run map_block_meta
 > make run map_block_full
 > make run map_blobs
@@ -40,8 +40,22 @@ And now you can stream the corresponding substreams modules:
 
 Alternatively, you can take advantage of `substreams gui` command for a nicer user interface:
 
-```
+```bash
 > make gui map_block_meta
 > make gui map_block_full
 > make gui map_blobs
 ```
+
+Or, you can just use `substreams` command to run it:
+```bash
+> substreams run -e eth-cl.substreams.pinax.network:443 map_block_meta -s -10
+```
+
+### Endpoints
+
+Pinax offers the following beacon chain substreams endpoints:
+- eth-cl.substreams.pinax.network:443
+- gnosis-cl.substreams.pinax.network:443
+- sepolia-cl.substreams.pinax.network:443
+- holesky-cl.substreams.pinax.network:443
+- chiado-cl.substreams.pinax.network:443

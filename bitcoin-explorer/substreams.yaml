@@ -8,7 +8,7 @@ package:
     This packages holds simple modules to allow you to explore the Bitcoin data model.  
 
 imports:
-  bitcoin: ../../firehose-bitcoin/substreams/bitcoin-v1.0.0.spkg
+  bitcoin: https://github.com/streamingfast/firehose-bitcoin/releases/download/v1.0.0/substreams-bitcoin-v1.0.0.spkg
 
 network: btc-mainnet
 

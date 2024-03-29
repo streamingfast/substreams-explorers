@@ -872,6 +872,7 @@ dependencies = [
  "hex-literal",
  "num-bigint",
  "prost",
+ "prost-types",
  "serde",
  "serde_qs",
  "substreams",

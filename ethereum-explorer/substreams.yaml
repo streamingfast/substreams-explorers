@@ -26,15 +26,6 @@ binaries:
     file: ./target/wasm32-unknown-unknown/release/substreams.wasm
 
 modules:
-  - name: map_block_meta
-    kind: map
-    inputs:
-      - source: sf.ethereum.type.v2.Block
-    output:
-      type: proto:eth.block_meta.v1.BlockMeta
-    doc: |
-      `map_block_meta` allows you to view a basic information about a block      
-
   - name: map_block_full
     kind: map
     inputs:
@@ -44,29 +35,38 @@ modules:
     doc: |
       `map_block_full` allows you to view a complete block, as received by a Substreams module      
 
-  - name: map_filter_transactions
+  - name: map_block_meta
     kind: map
     inputs:
-      - params: string
-      - source: sf.ethereum.type.v2.Block
+      - map: map_block_full
     output:
-      type: proto:eth.transaction.v1.Transactions
+      type: proto:eth.block_meta.v1.BlockMeta
     doc: |
-      `map_filter_transaction` allows you to find a transaction by specifying either `to` or `from` value in the parameters. You might need to scope your search to the blocks you know you are going to find that transaction. Check with your preferred block explorer first.
+      `map_block_meta` allows you to view a basic information about a block      
 
-  - name: map_contract_events
-    kind: map
-    inputs:
-      - params: string
-      - source: sf.ethereum.type.v2.Block
-    output:
-      type: proto:eth.event.v1.Events
-    doc: |
-      `map_contract_events` allows you to get instructions executed by a certain contract, and returns the raw Event data model.
-      
-
-params:
-  # Filtering transactions with to = 0xdAC17F958D2ee523a2206206994597C13D831ec7 (USDT contract address)
-  map_filter_transactions: "to=0xdAC17F958D2ee523a2206206994597C13D831ec7"
-  # Getting the logs of the BoredApeYachtClub smart contract
-  map_contract_events: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"
+      #  - name: map_filter_transactions
+      #    kind: map
+      #    inputs:
+      #      - params: string
+      #      - source: sf.ethereum.type.v2.Block
+      #    output:
+      #      type: proto:eth.transaction.v1.Transactions
+      #    doc: |
+      #      `map_filter_transaction` allows you to find a transaction by specifying either `to` or `from` value in the parameters. You might need to scope your search to the blocks you know you are going to find that transaction. Check with your preferred block explorer first.
+      #
+      #  - name: map_contract_events
+      #    kind: map
+      #    inputs:
+      #      - params: string
+      #      - source: sf.ethereum.type.v2.Block
+      #    output:
+      #      type: proto:eth.event.v1.Events
+      #    doc: |
+      #      `map_contract_events` allows you to get instructions executed by a certain contract, and returns the raw Event data model.
+      #      
+      #
+      #params:
+      #  # Filtering transactions with to = 0xdAC17F958D2ee523a2206206994597C13D831ec7 (USDT contract address)
+      #  map_filter_transactions: "to=0xdAC17F958D2ee523a2206206994597C13D831ec7"
+      #  # Getting the logs of the BoredApeYachtClub smart contract
+      #  map_contract_events: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"

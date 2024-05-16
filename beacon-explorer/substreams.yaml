@@ -4,9 +4,7 @@ package:
   image: ./ethereum.png
   url: "http://github.com/streamingfast/substreams-explorers/"
   version: v0.1.0
-  doc: |
-    This packages holds simple modules to allow you to explore the Ethereum Beacon chain data model.
-
+  
 imports:
   beacon: https://github.com/pinax-network/firehose-beacon/releases/download/v0.1.1/beacon-v0.1.1.spkg
 

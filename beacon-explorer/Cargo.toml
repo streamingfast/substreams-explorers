@@ -1,0 +1,21 @@
+[package]
+name = "substreams-beacon-explorer"
+version = "0.1.0"
+description = "Substreams showcasing the building blocks of Ethereum Beacon chain"
+edition = "2021"
+repository = "https://github.com/streamingfast/substreams-explorers"
+license = "Apache 2.0"
+
+[lib]
+name = "substreams"
+crate-type = ["cdylib"]
+
+[dependencies]
+prost = "0.11"
+prost-types = "0.11"
+substreams = "0.5"
+
+[profile.release]
+lto = true
+opt-level = 's'
+strip = "debuginfo"

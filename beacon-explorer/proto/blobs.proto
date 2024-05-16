@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package beacon.blobs.v1;
+
+message Blobs {
+  uint64 slot = 1;
+  repeated string blobs = 2;
+}
+

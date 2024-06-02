@@ -1,0 +1,13 @@
+
+syntax = "proto3";
+
+package cosmos.v1;
+
+message MsgExecMeta {
+    string grantee = 1;
+    repeated string msg_strings = 2;
+}
+
+message MsgExecList {
+    repeated MsgExecMeta msgs = 1;
+}

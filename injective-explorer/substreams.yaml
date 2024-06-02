@@ -1,0 +1,32 @@
+specVersion: v0.1.0
+package:
+  name: injective_explorer
+  version: v0.1.0
+  url: https://github.com/streamingfast/substreams-explorers/injective-explorer
+  doc: |
+     A Substreams that extracts basic data from the Injective blockchain
+
+network: cosmos
+
+imports:
+  cosmos: https://github.com/streamingfast/substreams-cosmos/releases/download/v0.1.1/cosmos-v0.1.0.spkg
+
+protobuf:
+  files:
+    - cosmos/v1/msg_exec.proto
+  importPaths:
+    - ./proto
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: target/wasm32-unknown-unknown/release/injective_explorer.wasm
+
+modules:
+  - name: map_msg_exec_messages
+    kind: map
+    initialBlock: 64987400
+    inputs:
+      - source: sf.cosmos.type.v2.Block
+    output:
+      type: proto:cosmos.v1.MsgExecList

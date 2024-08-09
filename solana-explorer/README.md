@@ -4,7 +4,7 @@ The Solana Explorer consists of several Substreams modules showcasing the most b
 
 ## Before You Begin
 
-Make sure you have the [Substreams CLI installed](https://substreams.streamingfast.io/getting-started/installing-the-cli), and you know the [basic structure of a Substreams module](https://substreams.streamingfast.io/getting-started/quickstart). You must also provide an [authentication token](https://substreams.streamingfast.io/reference-and-specs/authentication).
+Make sure you have the [Substreams CLI installed](https://substreams.streamingfast.io/getting-started/installing-the-cli), and you know the [basic structure of a Substreams module](https://substreams.streamingfast.io/documentation/intro-getting-started/intro-solana). You must also provide an [authentication token](https://substreams.streamingfast.io/documentation/consume/authentication).
 
 ## Modules
 
@@ -27,7 +27,7 @@ Then, build the Rust code using the `cargo` command-line tool:
 In the following command, you retrieve the metadata of the block with slot number `153000000`. You specify the starting block by using the `--start-block` parameter.
 
 ```bash
-> substreams gui -e mainnet.sol.streamingfast.io:443 ./solana-explorer-v0.1.0.spkg map_block_meta --start-block 153000000 --stop-block +1 
+> substreams gui -e mainnet.sol.streamingfast.io:443 ./solana-explorer-v0.1.0.spkg map_block_meta --start-block 153000000 --stop-block +1
 Connected (trace ID 0c93ceb65b98b138f0b8caf8a0e81c77)
 Progress messages received: 0 (0/sec)
 Backprocessing history up to requested target block 153000000:

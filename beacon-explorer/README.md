@@ -4,7 +4,7 @@ The Ethereum Beacon Chain Explorer consists of several Substreams modules showca
 
 ## Before You Begin
 
-Make sure you have the [Substreams CLI installed](https://substreams.streamingfast.io/getting-started/installing-the-cli), and you know the [basic structure of a Substreams module](https://substreams.streamingfast.io/getting-started/quickstart). You must also provide a Pinax [API key](https://app.pinax.network) as `$SUBSTREAMS_API_KEY` environment variable
+Make sure you have the [Substreams CLI installed](https://substreams.streamingfast.io/getting-started/installing-the-cli), and you know the [basic structure of a Substreams module](https://substreams.streamingfast.io/documentation/intro-getting-started/intro-evm). You must also provide a Pinax [API key](https://app.pinax.network) as `$SUBSTREAMS_API_KEY` environment variable
 
 ## Modules
 

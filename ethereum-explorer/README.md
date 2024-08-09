@@ -4,7 +4,7 @@ The Ethereum Explorer consists of several Substreams modules showcasing the most
 
 ## Before You Begin
 
-Make sure you have the [Substreams CLI installed](https://substreams.streamingfast.io/getting-started/installing-the-cli), and you know the [basic structure of a Substreams module](https://substreams.streamingfast.io/getting-started/quickstart). You must also provide an [authentication token](https://substreams.streamingfast.io/reference-and-specs/authentication).
+Make sure you have the [Substreams CLI installed](https://substreams.streamingfast.io/getting-started/installing-the-cli), and you know the [basic structure of a Substreams module](https://substreams.streamingfast.io/documentation/intro-getting-started/intro-evm). You must also provide an [authentication token](https://substreams.streamingfast.io/documentation/consume/authentication).
 
 ## Modules
 
@@ -81,7 +81,7 @@ This module allows you to filter transactions by two fields: `from` (the address
 yml
 ```
 map_filter_transactions: "to=0xdAC17F958D2ee523a2206206994597C13D831ec7"
-``` 
+```
 This filter only returns the transactions received by the USDT contract address (`0xdAC17F958D2ee523a2206206994597C13D831ec7`). Other possibilities for the filter include:
 
 - Using just `from`: `map_filter_transactions: "from=0xdAC17F958D2ee523a2206206994597C13D831ec7"`

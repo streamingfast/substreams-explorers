@@ -4,7 +4,7 @@ The Bitcoin Explorer consists of several Substreams modules showcasing the most 
 
 ## Before You Begin
 
-Make sure you have the [Substreams CLI installed](https://substreams.streamingfast.io/getting-started/installing-the-cli), and you know the [basic structure of a Substreams module](https://substreams.streamingfast.io/getting-started/quickstart). You must also provide an [authentication token](https://substreams.streamingfast.io/reference-and-specs/authentication).
+Make sure you have the [Substreams CLI installed](https://substreams.streamingfast.io/getting-started/installing-the-cli), and you know the [basic structure of a Substreams module](https://substreams.streamingfast.io/documentation/intro-getting-started). You must also provide an [authentication token](https://substreams.streamingfast.io/documentation/consume/authentication).
 
 ## Modules
 
@@ -16,7 +16,7 @@ For every block, the `map_block_meta` module retrieves the most relevant informa
 
 ### How Can You Retrieve Transactions
 
-For every block, the `map_transactions` modules summaries transaction number of vin and vout, the total valut of btc sent 
+For every block, the `map_transactions` modules summaries transaction number of vin and vout, the total valut of btc sent
 
 
 ## Running the Substreams
@@ -31,7 +31,7 @@ Then, build the Rust code using the `cargo` command-line tool:
 
 ```
 > make build
-``` 
+```
 
 Now, you are ready to run the Substreams. The Substreams contained in this project are independent of each other, so you must specify which Substreams module you want to run.
 
